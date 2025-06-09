@@ -1,5 +1,27 @@
+import HouseRow from "./HouseRow";
 
-const HouseList = ({ houses }) => {{
+const houses = [
+    {
+        id: 1,
+        address: "123 Main St",
+        country: "USA",
+        askingPrice: 300000
+    },
+    {
+        id: 2,
+        address: "456 Elm St",
+        country: "Canada",
+        askingPrice: 400000
+    },
+    {
+        id: 3,
+        address: "789 Oak St",
+        country: "UK",
+        askingPrice: 500000
+    }
+];
+
+const HouseList = () => {
     return (
         <>
             <div className="row mb-2">
@@ -16,15 +38,7 @@ const HouseList = ({ houses }) => {{
                     </tr>
                 </thead>
                 <tbody>
-                    {houses.map((house) => {
-                        return (
-                            <tr key={house.id}>
-                                <td>{house.address}</td>
-                                <td>{house.country}</td>
-                                <td>{house.askingPrice}</td>
-                            </tr>
-                        );
-                    })}
+                    {houses.map((house) => <HouseRow key={house.id} house={house} />)}
                 </tbody>
             </table>
         </>
