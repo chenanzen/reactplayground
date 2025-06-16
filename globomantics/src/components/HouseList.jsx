@@ -1,6 +1,7 @@
 
-import React, { useState } from "react";    
+import React, { useEffect, useState } from "react";    
 import HouseRow from "./HouseRow";
+
 
 const houseArray = [
     {
@@ -24,8 +25,22 @@ const houseArray = [
 ];
 
 const HouseList = () => {
+    console.log("state 1");
     const [houses, setHouses] = useState(houseArray);
 
+    useEffect(() => {
+        console.log("useEffect called");
+        // Simulate fetching data from an API
+        const fetchHouses = async () => {
+            console.log("Fetching houses...");
+            const response = await fetch("https://localhost:4000/house");
+            const houses = await response.json();
+            setHouses(houses);
+        };
+        fetchHouses();
+    }, []);
+
+    console.log("state 2");
     const addHouse = () => {
         const newHouse = {
             id: houses.length + 1,
