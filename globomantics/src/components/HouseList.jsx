@@ -1,6 +1,8 @@
+
+import React, { useState } from "react";    
 import HouseRow from "./HouseRow";
 
-const houses = [
+const houseArray = [
     {
         id: 1,
         address: "123 Main St",
@@ -22,6 +24,17 @@ const houses = [
 ];
 
 const HouseList = () => {
+    const [houses, setHouses] = useState(houseArray);
+
+    const addHouse = () => {
+        const newHouse = {
+            id: houses.length + 1,
+            address: "New House Address",
+            country: "New Country",
+            askingPrice: 600000
+        };
+        setHouses([...houses, newHouse]);
+    }
     return (
         <>
             <div className="row mb-2">
@@ -41,6 +54,7 @@ const HouseList = () => {
                     {houses.map((house) => <HouseRow key={house.id} house={house} />)}
                 </tbody>
             </table>
+            <button className="btn btn-primary" onClick={addHouse}>Add House</button>
         </>
     ); 
 };
