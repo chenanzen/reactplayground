@@ -1,42 +1,8 @@
-
-import React, { useEffect, useState } from "react";    
 import HouseRow from "./HouseRow";
+import useHouses from "../hooks/useHouses";
 
-
-const houseArray = [
-    {
-        id: 1,
-        address: "123 Main St",
-        country: "USA",
-        price: 300000
-    },
-    {
-        id: 2,
-        address: "456 Elm St",
-        country: "Canada",
-        price: 400000
-    },
-    {
-        id: 3,
-        address: "789 Oak St",
-        country: "UK",
-        price: 500000
-    }
-];
-
-const HouseList = () => {
-    const [houses, setHouses] = useState([]);
-
-    useEffect(() => {
-        // Simulate fetching data from an API
-        const fetchHouses = async () => {
-            const response = await fetch("https://localhost:4000/house");
-            const houses = await response.json();
-            console.log(houses);
-            setHouses(houses);
-        };
-        fetchHouses();
-    }, []);
+const HouseList = ({selectHouse}) => {
+    const {houses, setHouses} = useHouses();
 
     const addHouse = () => {
         const newHouse = {
@@ -47,6 +13,7 @@ const HouseList = () => {
         };
         setHouses([...houses, newHouse]);
     }
+
     return (
         <>
             <div className="row mb-2">
@@ -63,7 +30,7 @@ const HouseList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {houses.map((house) => <HouseRow key={house.id} house={house} />)}
+                    {houses.map((house) => <HouseRow selectHouse={selectHouse} key={house.id} house={house} />)}
                 </tbody>
             </table>
             <button className="btn btn-primary" onClick={addHouse}>Add House</button>
