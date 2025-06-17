@@ -8,45 +8,42 @@ const houseArray = [
         id: 1,
         address: "123 Main St",
         country: "USA",
-        askingPrice: 300000
+        price: 300000
     },
     {
         id: 2,
         address: "456 Elm St",
         country: "Canada",
-        askingPrice: 400000
+        price: 400000
     },
     {
         id: 3,
         address: "789 Oak St",
         country: "UK",
-        askingPrice: 500000
+        price: 500000
     }
 ];
 
 const HouseList = () => {
-    console.log("state 1");
-    const [houses, setHouses] = useState(houseArray);
+    const [houses, setHouses] = useState([]);
 
     useEffect(() => {
-        console.log("useEffect called");
         // Simulate fetching data from an API
         const fetchHouses = async () => {
-            console.log("Fetching houses...");
             const response = await fetch("https://localhost:4000/house");
             const houses = await response.json();
+            console.log(houses);
             setHouses(houses);
         };
         fetchHouses();
     }, []);
 
-    console.log("state 2");
     const addHouse = () => {
         const newHouse = {
             id: houses.length + 1,
             address: "New House Address",
             country: "New Country",
-            askingPrice: 600000
+            Price: 600000
         };
         setHouses([...houses, newHouse]);
     }
